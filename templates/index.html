@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #000000;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #000000;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1.1rem;
+            color: #555;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #5a5a5a;
+            outline: none;
+        }
+
+        button {
+            background-color: #a5a5a5;
+            color: white;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #585858;
+        }
+
+        .weather-info {
+            background-color: #fff;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .weather-info img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .weather-info .details {
+            text-align: left;
+            margin-left: 20px;
+        }
+
+        .weather-info h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .weather-info p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .weather-info {
+                grid-template-columns: 1fr;
+            }
+
+            .weather-info .details {
+                margin-left: 0;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Weather Information</h1>
+        
+        <form method="POST" action="/">
+            <div class="form-group">
+                <label for="city_name">Enter City Name:</label>
+                <input type="text" id="city_name" name="city_name" placeholder="e.g. New York" required>
+            </div>
+            <button type="submit">Get Weather</button>
+        </form>
+
+        {% if weather_data %}
+        <div class="weather-info">
+            <img src="{{ icon }}" alt="Weather Icon">
+            <div class="details">
+                <h2>Weather in {{ city }}:</h2>
+                <p><strong>Main:</strong> {{ weather_data.main }}</p>
+                <p><strong>Description:</strong> {{ weather_data.description }}</p>
+                <p><strong>Temperature:</strong> {{ weather_data.temperature }} °C</p>
+                <p><strong>Feels like:</strong> {{ weather_data.feels_like }} °C</p>
+            </div>
+        </div>
+        {% elif weather_data is not none %}
+        <p class="error-message">Error: Unable to get weather data for city '{{ city }}'. Please check the city name and try again.</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+python-dotenv
+requests
+
+flask==2.1
+werkzeug==2.0.3
