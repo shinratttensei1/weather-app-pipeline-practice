@@ -17,13 +17,13 @@ jobs:
     - name: Setting Environment Variables
       env:
         API_KEY: ${{ secrets.WEATHER_API_KEY }}
-          
+
       run: echo "API_KEY=$API_KEY" >> $GITHUB_ENV
 
     - name: Delete the Old docker container
       run: docker rm -f petproject-container || true
 
     - name: Run Docker Container
-      run: docker run -d -p 5000:5000 --name petproject-container shinratttensei/petproject
+      run: docker run -d -p 5000:5000 --name petproject-container -e API_KEY=${{ secrets.API_KEY }} shinratttensei/petproject
 
 
