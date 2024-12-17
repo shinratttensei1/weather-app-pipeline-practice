@@ -14,6 +14,6 @@ ENV API_KEY=${API_KEY}
 RUN useradd app
 USER app
 
-EXPOSE 8080
+EXPOSE 5000
 
 CMD ["python", "app.py"]

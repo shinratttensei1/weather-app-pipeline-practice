@@ -5,7 +5,7 @@ services:
     build:
       context: /home/biba/petProj
     ports:
-      - "8080:8080"
+      - "5000:5000"
     environment:
       - API_KEY=${API_KEY}
     volumes:
