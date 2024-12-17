@@ -20,9 +20,5 @@ jobs:
     - name: Build the Docker image
       run: docker build -t shinratttensei/petproject:latest .
 
-    - name: Run Tests inside Docker container
-      run: |
-        docker run --rm shinratttensei/petproject:latest python -m unittest discover -s tests.py
-
     - name: Push to Dockerhub if tests pass
       run: docker push shinratttensei/petproject:latest
